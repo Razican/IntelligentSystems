@@ -5,8 +5,8 @@ import es.deusto.ingenieria.is.search.formulation.State;
 
 public class BWSProblem extends Problem {
 
-	public BWSProblem() {
-		
+	public BWSProblem(String pathToPercepts) {
+		addInitialState(gatherInitialPercepts());
 	}
 
 	
@@ -17,6 +17,7 @@ public class BWSProblem extends Problem {
 	}
 	
 	public boolean isFinalState(State state) {
-		return super.isFinalState(state);
+		// If the current position is smaller than the line's number of states we are not in the final state.
+		return ((Environment) state).getCurrentPos() < ((Environment) state).getLine().size() ? false : true;	
 	}
 }

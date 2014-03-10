@@ -47,14 +47,13 @@ public class Environment extends State {
 	}
 
 	public boolean equals(Object obj){
-		// TODO Homework: redefine
 		// When do we consider that two different environments are equal?
 		// When both environments have the same number of squares + each square at position 'x' has the same colour
 		if(((Environment) obj).getLine().size() != this.getLine().size())
 			return false;
 		
 		boolean eq= true;
-		int i=0;
+		int i= 0;
 		
 		while(eq && i < this.getLine().size()){
 			if(this.getLine().get(i).equals(((Environment) obj).getLine().get(i)))
@@ -65,6 +64,6 @@ public class Environment extends State {
 	}
 
 	public String toString(){
-		return "Environment currentPos " + this.currentPos + " line";
+		return "Environment currentPos " + this.currentPos + "\n\t" + line;
 	}
 }
