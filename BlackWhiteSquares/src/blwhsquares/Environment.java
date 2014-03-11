@@ -41,9 +41,14 @@ public class Environment extends State {
 	public int getCurrentPos() {
 		return currentPos;
 	}
-
+	
 	public void setCurrentPos(int currentPos) {
 		this.currentPos = currentPos;
+	}
+	
+	// Defined to make things easier
+	public Square getCurrentSquareColor(){
+		return line.get(currentPos);
 	}
 
 	public boolean equals(Object obj){
