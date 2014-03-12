@@ -18,7 +18,7 @@ public abstract class MoveRight extends Operator {
 	public abstract boolean isApplicable(State st);
 
 	// The effect is inherited and is always the same (depending on 'squaresToMove')
-	protected State effect(State arg0) {
+	public State effect(State arg0) {
 		// The effect is to move X squares right if the action is applicable.
 		if(isApplicable(arg0))
 			((Environment) arg0).setCurrentPos(((Environment) arg0).getCurrentPos() + squaresToMove);
