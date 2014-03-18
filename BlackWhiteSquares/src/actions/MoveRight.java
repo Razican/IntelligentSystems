@@ -20,9 +20,12 @@ public abstract class MoveRight extends Operator {
 
 	// The effect is inherited and is always the same (depending on 'squaresToMove')
 	public State effect(State arg0) {
+		// We first clone the object
+		Environment env = ((Environment) arg0).clone();
+		
 		// The effect is to move X squares right.
-		((Environment) arg0).setCurrentPos(((Environment) arg0).getCurrentPos() + squaresToMove);
-		return arg0;
+		env.setCurrentPos(env.getCurrentPos() + squaresToMove);
+		
+		return env;
 	}
-
 }

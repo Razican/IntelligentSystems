@@ -5,7 +5,7 @@ import java.util.List;
 
 import es.deusto.ingenieria.is.search.formulation.State;
 
-public class Environment extends State {
+public class Environment extends State implements Cloneable {
 
 	public enum Square {
 		WHITE,
@@ -71,8 +71,16 @@ public class Environment extends State {
 		}
 		return eq;
 	}
+	
+	@Override
+	public Environment clone()
+	{
+		//The list will not change, so we keep the reference to the current object and
+		//we save space
+		return new Environment(this.line, this.currentPos);
+	}
 
 	public String toString(){
-		return "Environment currentPos " + this.currentPos + "\n\t" + line;
+		return "Environment currentPos: " + this.currentPos + "\n\t" + line;
 	}
 }

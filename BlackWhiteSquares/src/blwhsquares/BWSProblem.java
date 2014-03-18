@@ -29,4 +29,9 @@ public class BWSProblem extends Problem {
 		super.addOperator(new MoveRightTwo());
 		super.addOperator(new MoveRightFour());
 	}
+	
+	public Node solve(SearchAlgorithm alg)
+	{
+		// TODO
+	}
 }
