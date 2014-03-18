@@ -52,6 +52,10 @@ public class Environment extends State {
 	}
 
 	public boolean equals(Object obj){
+		// We first check if we have a correct object to compare
+		if (obj == null || ! (obj instanceof Environment))
+			return false;
+		
 		// When do we consider that two different environments are equal?
 		// When both environments have the same number of squares + each square at position 'x' has the same colour
 		if(((Environment) obj).getLine().size() != this.getLine().size())

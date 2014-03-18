@@ -3,15 +3,12 @@ package blwhsquares;
 import actions.MoveRightFour;
 import actions.MoveRightOne;
 import actions.MoveRightTwo;
-import es.deusto.ingenieria.is.search.formulation.Operator;
 import es.deusto.ingenieria.is.search.formulation.Problem;
 import es.deusto.ingenieria.is.search.formulation.State;
 
 public class BWSProblem extends Problem {
 
-	private Operator[] operators;
-
-	public BWSProblem(String pathToPercepts) {
+	public BWSProblem() {
 		addInitialState(gatherInitialPercepts());
 	}
 	

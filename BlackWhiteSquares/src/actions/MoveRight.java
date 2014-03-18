@@ -9,7 +9,8 @@ public abstract class MoveRight extends Operator {
 	// Number of squares to move right
 	private int squaresToMove;
 	
-	public MoveRight(int squaresToMove) {
+	public MoveRight(String name, int squaresToMove) {
+		super(name);
 		this.squaresToMove= squaresToMove;
 	}
 	
@@ -19,9 +20,8 @@ public abstract class MoveRight extends Operator {
 
 	// The effect is inherited and is always the same (depending on 'squaresToMove')
 	public State effect(State arg0) {
-		// The effect is to move X squares right if the action is applicable.
-		if(isApplicable(arg0))
-			((Environment) arg0).setCurrentPos(((Environment) arg0).getCurrentPos() + squaresToMove);
+		// The effect is to move X squares right.
+		((Environment) arg0).setCurrentPos(((Environment) arg0).getCurrentPos() + squaresToMove);
 		return arg0;
 	}
 

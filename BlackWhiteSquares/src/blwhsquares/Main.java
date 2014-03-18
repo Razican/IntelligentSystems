@@ -12,7 +12,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		Problem p = new BWSProblem("percepts/blackwhitesquares1.xml");
+		Problem p = new BWSProblem();
 		
 		List<State> states = p.getInitialStates();
 		System.out.println(states.get(0));

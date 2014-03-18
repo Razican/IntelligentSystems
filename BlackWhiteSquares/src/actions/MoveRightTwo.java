@@ -9,7 +9,7 @@ public class MoveRightTwo extends MoveRight{
 	private static final int moves= 2;
 	
 	public MoveRightTwo() {
-		super(moves);
+		super("MoveTwo", moves);
 	}
 
 	public boolean isApplicable(State st) {
