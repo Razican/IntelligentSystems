@@ -3,6 +3,8 @@ package blwhsquares;
 import actions.MoveRightFour;
 import actions.MoveRightOne;
 import actions.MoveRightTwo;
+import es.deusto.ingenieria.is.search.algorithms.Node;
+import es.deusto.ingenieria.is.search.algorithms.SearchMethod;
 import es.deusto.ingenieria.is.search.formulation.Problem;
 import es.deusto.ingenieria.is.search.formulation.State;
 
@@ -30,8 +32,10 @@ public class BWSProblem extends Problem {
 		super.addOperator(new MoveRightFour());
 	}
 	
-	public Node solve(SearchAlgorithm alg)
+	public Node solve(SearchMethod alg)
 	{
-		// TODO
+		//TODO
+		return alg.search(this, this.getInitialStates().get(0));
+		
 	}
 }
