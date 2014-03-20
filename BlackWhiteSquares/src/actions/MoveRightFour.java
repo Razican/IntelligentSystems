@@ -12,7 +12,7 @@ public class MoveRightFour extends MoveRight{
 		super("MoveFour", moves);
 	}
 
-	public boolean isApplicable(State st) {
+	protected boolean isApplicable(State st) {
 		// Condition: current square is BLACK
 		// 'getCurrentSquareColor' defined in environment to make things easier.
 		return ((Environment) st).getCurrentSquareColor().equals(Square.BLACK) ? true : false;

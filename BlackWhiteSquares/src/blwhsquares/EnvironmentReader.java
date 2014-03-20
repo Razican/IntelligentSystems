@@ -9,7 +9,7 @@ import es.deusto.ingenieria.is.search.xml.StateXMLReader;
 
 public class EnvironmentReader extends StateXMLReader {
 
-	// The initial state encironment state
+	// The initial state environment state
 	private State environment;
 
 	// The initial problem environment state
@@ -29,7 +29,5 @@ public class EnvironmentReader extends StateXMLReader {
 			((Environment) this.environment).addSquare(Square.WHITE);
 		else if(qname.equals("is:black"))
 			((Environment) this.environment).addSquare(Square.BLACK);
-
 	}
-
 }

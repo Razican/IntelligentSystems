@@ -2,7 +2,6 @@ package blwhsquares;
 
 import java.util.List;
 
-import actions.MoveRight;
 import es.deusto.ingenieria.is.search.algorithms.Node;
 import es.deusto.ingenieria.is.search.algorithms.blind.BreadthFSwithLog;
 import es.deusto.ingenieria.is.search.algorithms.blind.DepthFSwithLog;
@@ -36,13 +35,9 @@ public class Main {
 		
 		for (Operator o : op)
 		{
-			System.out.println(((MoveRight) o).isApplicable(states.get(0)));
-			System.out.println(((MoveRight) o).effect(states.get(0)));
-			
+			System.out.println(o.apply(states.get(0)));
 		}
-		
-		
-		
+
 		// HW3
 		System.out.println("\n-----");
 		System.out.println("Blind");
@@ -55,7 +50,5 @@ public class Main {
 		System.out.println("$ Running: DFS-log");
 		n= ((BWSProblem) p).solve(DepthFSwithLog.getInstance());
 		System.out.println(n);
-		
-		
 	}
 }

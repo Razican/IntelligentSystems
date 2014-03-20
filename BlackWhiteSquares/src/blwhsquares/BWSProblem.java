@@ -20,6 +20,7 @@ public class BWSProblem extends Problem {
 		return reader.getState();
 	}
 	
+	@Override
 	public boolean isFinalState(State state) {
 		// If the current position is smaller than the line's number of states we are not in the final state.
 		return ((Environment) state).getCurrentPos() < ((Environment) state).getLine().size() ? false : true;	
@@ -34,8 +35,6 @@ public class BWSProblem extends Problem {
 	
 	public Node solve(SearchMethod alg)
 	{
-		//TODO
-		return alg.search(this, this.getInitialStates().get(0));
-		
+		return alg.search(this, getInitialStates().get(0));
 	}
 }

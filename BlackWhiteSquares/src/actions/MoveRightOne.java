@@ -10,7 +10,7 @@ public class MoveRightOne extends MoveRight{
 		super("MoveOne", moves);
 	}
 
-	public boolean isApplicable(State st) {
+	protected boolean isApplicable(State st) {
 		// We can always move one square right
 		return true;
 	}

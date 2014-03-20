@@ -56,20 +56,20 @@ public class Environment extends State implements Cloneable {
 		if (obj == null || ! (obj instanceof Environment))
 			return false;
 		
+		Environment env = (Environment) obj;
+		
 		// When do we consider that two different environments are equal?
-		// When both environments have the same number of squares + each square at position 'x' has the same colour
-		if(((Environment) obj).getLine().size() != this.getLine().size())
+		// When both environments have the same number of squares &&
+		// each square at position 'x' has the same colour &&
+		// the current position is the same
+		if (env.getCurrentPos() != this.getCurrentPos() ||
+			env.getLine().size() != this.getLine().size())
 			return false;
 		
-		boolean eq= true;
-		int i= 0;
+		for (int i = 0; i < this.getLine().size(); i++)
+			if (this.getLine().get(i) != env.getLine().get(i)) return false;
 		
-		while(eq && i < this.getLine().size()){
-			if(this.getLine().get(i).equals(((Environment) obj).getLine().get(i)))
-				i++;
-			else eq= false;
-		}
-		return eq;
+		return true;
 	}
 	
 	@Override

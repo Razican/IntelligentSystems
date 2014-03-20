@@ -12,7 +12,7 @@ public class MoveRightTwo extends MoveRight{
 		super("MoveTwo", moves);
 	}
 
-	public boolean isApplicable(State st) {
+	protected boolean isApplicable(State st) {
 		// Condition: current square is WHITE
 		// 'getCurrentSquareColor' defined in environment to make things easier.
 		return ((Environment) st).getCurrentSquareColor().equals(Square.WHITE) ? true : false;
