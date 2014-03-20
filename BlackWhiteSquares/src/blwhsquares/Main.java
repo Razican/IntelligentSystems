@@ -1,5 +1,7 @@
 package blwhsquares;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import es.deusto.ingenieria.is.search.algorithms.Node;
@@ -7,7 +9,6 @@ import es.deusto.ingenieria.is.search.algorithms.blind.BreadthFS;
 import es.deusto.ingenieria.is.search.algorithms.blind.BreadthFSwithLog;
 import es.deusto.ingenieria.is.search.algorithms.blind.DepthFS;
 import es.deusto.ingenieria.is.search.algorithms.blind.DepthFSwithLog;
-import es.deusto.ingenieria.is.search.formulation.Operator;
 import es.deusto.ingenieria.is.search.formulation.State;
 
 public class Main {
@@ -20,7 +21,7 @@ public class Main {
 		System.out.println(states.get(0));
 		((BWSProblem) p).createOperators();
 		
-		// HW 2
+		/* HW 2
 		Environment finalState = new Environment(2);
 		finalState.addSquare(Environment.Square.BLACK);
 		finalState.addSquare(Environment.Square.WHITE);
@@ -38,8 +39,9 @@ public class Main {
 		{
 			System.out.println(o.apply(states.get(0)));
 		}
-
+		*/
 		// HW3
+		
 		System.out.println("\n-----");
 		System.out.println("Blind");
 		System.out.println("-----\n");
@@ -63,21 +65,36 @@ public class Main {
 
 		for (int i = 0; i < checks; i++)
 		{
+			System.out.println("\n$ Running check #" + (i+1));
+			List<String> solutionMoves= new ArrayList<String>();
+			
 			// BFS performance check:
 			long start = System.nanoTime();
-			p.solve(BreadthFS.getInstance());
+			n= p.solve(BreadthFS.getInstance());
 			long end = System.nanoTime();
 			
 			bfsTotal += end-start;
 			
+			System.out.println("BFS solution:");
+			BreadthFS.getInstance().solutionPath(n, solutionMoves);
+			System.out.println("\t" + solutionMoves);
+			
+			
 			// DFS performance check:
 			start = System.nanoTime();
-			p.solve(DepthFS.getInstance());
+			n= p.solve(DepthFS.getInstance());
 			end = System.nanoTime();
 			
 			dfsTotal += end-start;
+			
+			System.out.println("DFS solution");
+			solutionMoves= new ArrayList<String>();
+			DepthFS.getInstance().solutionPath(n, solutionMoves);
+			System.out.println("\t" + solutionMoves);
 		}
-		
+		System.out.println("\n-----");
+		System.out.println("Stats");
+		System.out.println("-----\n");
 		System.out.println("BFS: " + bfsTotal/(checks*1000) + " μs");
 		System.out.println("DFS: " + dfsTotal/(checks*1000) + " μs");
 		

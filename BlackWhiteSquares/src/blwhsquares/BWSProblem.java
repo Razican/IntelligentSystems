@@ -28,9 +28,10 @@ public class BWSProblem extends Problem {
 	
 	public void createOperators()
 	{
+		// This arrangement gives the best timing for BFS
+		super.addOperator(new MoveRightFour());
 		super.addOperator(new MoveRightOne());
 		super.addOperator(new MoveRightTwo());
-		super.addOperator(new MoveRightFour());
 	}
 	
 	public Node solve(SearchMethod alg)
