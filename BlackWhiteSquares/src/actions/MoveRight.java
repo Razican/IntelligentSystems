@@ -10,7 +10,7 @@ public abstract class MoveRight extends Operator {
 	private int squaresToMove;
 	
 	public MoveRight(String name, int squaresToMove) {
-		super(name);
+		super(name, 1);
 		this.squaresToMove= squaresToMove;
 	}
 	
@@ -25,7 +25,6 @@ public abstract class MoveRight extends Operator {
 		
 		// The effect is to move X squares right.
 		env.setCurrentPos(env.getCurrentPos() + squaresToMove);
-		System.out.println(env);
 		
 		return env;
 	}

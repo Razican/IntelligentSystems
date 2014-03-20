@@ -3,17 +3,18 @@ package blwhsquares;
 import java.util.List;
 
 import es.deusto.ingenieria.is.search.algorithms.Node;
+import es.deusto.ingenieria.is.search.algorithms.blind.BreadthFS;
 import es.deusto.ingenieria.is.search.algorithms.blind.BreadthFSwithLog;
+import es.deusto.ingenieria.is.search.algorithms.blind.DepthFS;
 import es.deusto.ingenieria.is.search.algorithms.blind.DepthFSwithLog;
 import es.deusto.ingenieria.is.search.formulation.Operator;
-import es.deusto.ingenieria.is.search.formulation.Problem;
 import es.deusto.ingenieria.is.search.formulation.State;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-		Problem p = new BWSProblem();
+		BWSProblem p = new BWSProblem();
 		
 		List<State> states = p.getInitialStates();
 		System.out.println(states.get(0));
@@ -44,11 +45,42 @@ public class Main {
 		System.out.println("-----\n");
 		
 		System.out.println("$ Running: BFS-log");
-		Node n =((BWSProblem) p).solve(BreadthFSwithLog.getInstance());
+		Node n = p.solve(BreadthFSwithLog.getInstance());
 		System.out.println(n);
 		
 		System.out.println("$ Running: DFS-log");
-		n= ((BWSProblem) p).solve(DepthFSwithLog.getInstance());
+		n= p.solve(DepthFSwithLog.getInstance());
 		System.out.println(n);
+		
+		System.out.println("\n-----");
+		System.out.println("Performance measure");
+		System.out.println("-----\n");
+		
+		double bfsTotal = 0, dfsTotal = 0;
+		int checks = 10000;
+		
+		System.out.println("Checks to be performed: "+checks+"\n");
+
+		for (int i = 0; i < checks; i++)
+		{
+			// BFS performance check:
+			long start = System.nanoTime();
+			p.solve(BreadthFS.getInstance());
+			long end = System.nanoTime();
+			
+			bfsTotal += end-start;
+			
+			// DFS performance check:
+			start = System.nanoTime();
+			p.solve(DepthFS.getInstance());
+			end = System.nanoTime();
+			
+			dfsTotal += end-start;
+		}
+		
+		System.out.println("BFS: " + bfsTotal/(checks*1000) + " μs");
+		System.out.println("DFS: " + dfsTotal/(checks*1000) + " μs");
+		
+		System.out.println("Comparison (BFS/DFS): " + bfsTotal/dfsTotal);
 	}
 }
