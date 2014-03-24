@@ -39,7 +39,8 @@ public class AStar extends HeuristicSearchMethod {
 				// EXPAND node's state
 				successorNodes= expand(firstNode, problem);
 				// Insert successor nodes into the frontier
-				frontier.addAll(successorNodes);
+				if(successorNodes != null && !successorNodes.isEmpty())
+					frontier.addAll(successorNodes);
 				// Sort frontier in ascending order of f(n)
 				Collections.sort(frontier);
 			}
