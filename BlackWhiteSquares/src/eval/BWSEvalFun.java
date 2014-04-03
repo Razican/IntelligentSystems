@@ -17,7 +17,12 @@ public class BWSEvalFun extends EvaluationFunction{
 	public double calculateH(Node node) {
 		// Long names due to consistency according to what we wrote on the questions
 		double numberOfSquaresToLastSquare = ((Environment) node.getState()).getLine().size() - ((Environment) node.getState()).getCurrentPos();
-		return Math.floor(numberOfSquaresToLastSquare / 4d);
+		// [DEBUG] System.out.println("$ Current pos: " + ((Environment)node.getState()).getCurrentPos());
+		// [DEBUG] System.out.println("Number of squares to last square: " + numberOfSquaresToLastSquare);
+		
+		// [DEBUG] double ret = Math.ceil(numberOfSquaresToLastSquare / 4d);
+		// [DEBUG] System.out.println(" H is :" + ret);
+		return Math.ceil(numberOfSquaresToLastSquare / 4d);
 	}
 
 }
