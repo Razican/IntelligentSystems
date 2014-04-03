@@ -17,7 +17,7 @@ public class AStar extends HeuristicSearchMethod {
 		super(function);
 	}
 	
-	public Node search(Problem problem, State initialState) { // TODO not tested
+	public Node search(Problem problem, State initialState) { 
 		// Make a node with the initial problem state
 		Node firstNode= new Node(initialState);
 		// Insert node into the frontier data structure
@@ -50,7 +50,7 @@ public class AStar extends HeuristicSearchMethod {
 		return solutionFound ? firstNode : null;
 	}
 	
-	protected List<Node> expand(Node node, Problem problem) { // TODO not tested
+	protected List<Node> expand(Node node, Problem problem) { 
 		// Initialize Successors to an empty list
 		List<Node> successorNodes= new ArrayList<Node>();
 		// FOR EACH applicable action on state of current node DO
@@ -66,7 +66,6 @@ public class AStar extends HeuristicSearchMethod {
 				// Successor node depth = current node depth + 1
 				succesorNode.setDepth(node.getDepth() + 1);
 				// Compute f(succ) =  g(succ) + h(succ)
-				// TODO review
 				succesorNode.setH(this.getEvaluationFunction().calculateG(succesorNode) + this.getEvaluationFunction().calculateH(succesorNode));
 				// (Other things)
 				succesorNode.setParent(node);

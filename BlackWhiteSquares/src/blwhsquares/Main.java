@@ -168,6 +168,7 @@ public class Main {
 			}
 			
 			// A* performance check:
+			
 			start = System.nanoTime();
 			n = p.solve(new AStar(new BWSEvalFun()));
 			end = System.nanoTime();
@@ -180,6 +181,7 @@ public class Main {
 				new AStar(new BWSEvalFun()).solutionPath(n, solutionMoves);
 				System.out.println("\t" + solutionMoves);
 			}
+			
 			
 		}
 		System.out.println("\n-----");
