@@ -1,8 +1,5 @@
 package blwhsquares;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import actions.MoveRightFour;
 import actions.MoveRightOne;
 import actions.MoveRightTwo;
@@ -42,14 +39,7 @@ public class BWSProblem extends Problem {
 	
 	public Node solve(SearchMethod alg)
 	{
-		// Feedback comment:
-		// Better to call solutionPath() from solve() and please make sure
-		// you save the sequence of actions found by your system in a log file
-		// as we indicated in class: “createSolutionLog()” from SearchMethod.
-		Node n = alg.search(this, getInitialStates().get(0));
-		List<String> list = new ArrayList<String>();
-		// TODO alg.solutionPath(n, list);
-		// TODO alg.createSolutionLog(list);
-		return n;
+		// We search for the solution
+		return alg.search(this, getInitialStates().get(0));
 	}
 }

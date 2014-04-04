@@ -35,9 +35,10 @@ public class AStar extends HeuristicSearchMethod {
 				// THEN final state found
 				solutionFound= true;
 			// IF node does not contain final state
-			else{
+			else
+			{
 				// EXPAND node's state
-				successorNodes= expand(firstNode, problem);
+				successorNodes = expand(firstNode, problem);
 				// Insert successor nodes into the frontier
 				if(successorNodes != null && !successorNodes.isEmpty())
 					frontier.addAll(successorNodes);
@@ -65,10 +66,12 @@ public class AStar extends HeuristicSearchMethod {
 				succesorNode.setOperator(operator.getName());
 				// Successor node depth = current node depth + 1
 				succesorNode.setDepth(node.getDepth() + 1);
-				// Compute f(succ) =  g(succ) + h(succ)
-				succesorNode.setH(this.getEvaluationFunction().calculateG(succesorNode) + this.getEvaluationFunction().calculateH(succesorNode));
-				// (Other things)
+				// We set it's parent
 				succesorNode.setParent(node);
+				// We set G
+				succesorNode.setG(this.getEvaluationFunction().calculateG(succesorNode));
+				// We set H
+				succesorNode.setH(this.getEvaluationFunction().calculateH(succesorNode));
 				// Add successor node to Successors
 				successorNodes.add(succesorNode);
 			}
