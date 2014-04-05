@@ -9,17 +9,7 @@ public class BWSEvalFun extends EvaluationFunction{
 	public double calculateG(Node node) {
 		// The accumulated cost is the count of actions
 		// since every action costs the same, so the number of nodes.
-
-		int g = 0;
-		if (node != null)
-		{
-			while(node.getParent() != null)
-			{
-				g++;
-				node = node.getParent();
-			}
-		}
-		return g;
+		return node.getDepth();
 	}
 	
 	public double calculateH(Node node) {

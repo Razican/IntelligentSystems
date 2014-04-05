@@ -32,9 +32,10 @@ public class BWSProblem extends Problem {
 		//super.addOperator(new MoveRightFour());
 		//super.addOperator(new MoveRightOne());
 		//super.addOperator(new MoveRightTwo());
-		super.addOperator(new MoveRightOne());
 		super.addOperator(new MoveRightTwo());
 		super.addOperator(new MoveRightFour());
+		super.addOperator(new MoveRightOne());
+		
 	}
 	
 	public Node solve(SearchMethod alg)
