@@ -7,6 +7,7 @@ import algorithms.AStar;
 import es.deusto.ingenieria.is.search.algorithms.blind.BreadthFS;
 import es.deusto.ingenieria.is.search.algorithms.blind.DepthFS;
 import es.deusto.ingenieria.is.search.algorithms.heuristic.BestFS;
+import es.deusto.ingenieria.is.search.formulation.Operator;
 import es.deusto.ingenieria.is.search.formulation.State;
 import eval.BWSEvalFun;
 
@@ -14,13 +15,14 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		/* //TODO (mark) HW 2
 		BWSProblem p = new BWSProblem();
 
 		List<State> states = p.getInitialStates();
 		System.out.println(states.get(0));
 		((BWSProblem) p).createOperators();
 
-		/* HW 2
+		
 		Environment finalState = new Environment(2);
 		finalState.addSquare(Environment.Square.BLACK);
 		finalState.addSquare(Environment.Square.WHITE);
@@ -40,7 +42,7 @@ public class Main {
 		}
 		 */
 
-		// HW3
+		//TODO (mark) HW3
 		/*
 		System.out.println("\n-----");
 		System.out.println("Blind");
@@ -101,7 +103,7 @@ public class Main {
 		System.out.println("Comparison (BFS/DFS): " + bfsTotal/dfsTotal);
 		 */
 
-		// HW 4
+		//TODO (mark) HW 4
 		/*
 		BWSEvalFun evaluationFunction = new BWSEvalFun();
 		Node n = p.solve(new BestFS(evaluationFunction));
@@ -109,7 +111,7 @@ public class Main {
 		new BestFS(evaluationFunction).solutionPath(n, solutionMoves);
 		System.out.println(solutionMoves);
 		 */
-
+		/*
 		double brfsTotal = 0, dfsTotal = 0, bfsTotal = 0, astarTotal = 0;
 		int checks = 10000;
 		
@@ -191,5 +193,14 @@ public class Main {
 		System.out.println("DFS: "+ dfsSolution);
 		System.out.println("BFS: "+bfsSolution);
 		System.out.println("A*: " + astarSolution);
+		*/
+		
+		//TODO (mark) H5
+		// Modified constructor
+		BWSProblem p = new BWSProblem("percepts/blackwhitesquaresPartialpercepts1.xml");
+		((BWSProblem) p).createOperators();
+		((Environment)((State) p.getInitialStates().toArray()[0])).setCurrentPos(1);
+		System.out.println(p.getInitialStates().toArray()[1]);
+		
 	}
 }
