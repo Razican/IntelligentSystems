@@ -13,7 +13,6 @@ import es.deusto.ingenieria.is.search.formulation.State;
 
 public class BWSProblem extends Problem {
 
-	private int length;
 	private Scanner scan = new Scanner(System.in);
 
 	public BWSProblem() {
@@ -30,18 +29,24 @@ public class BWSProblem extends Problem {
 	@Override
 	public State gatherInitialPercepts() {
 		EnvironmentReader reader= new EnvironmentReader("percepts/blackwhitesquares1.xml");
+		
 		// The first state read is the initial state
 		return reader.getState();
 	}
-	/** Gathers iniital percepts from the specified file
+	/** Gathers initial percepts from the specified file
 	 * @param percepts
 	 * @return
 	 */
 	public State gatherInitialPercepts(String percepts) {
 		EnvironmentReader reader= new EnvironmentReader(percepts);
-		length = reader.getLength();
+		
+		State state = reader.getState();
+		
+		for (int i = ((Environment) state).getLine().size(); i <= reader.getLength(); i++)
+			((Environment) state).addSquare(Square.UNKNOWN);
+		
 		// The first state read is the initial state
-		return reader.getState();
+		return state;
 	}
 
 	@Override
@@ -69,8 +74,8 @@ public class BWSProblem extends Problem {
 
 	// HW 5
 	@Override
-	public boolean isFullyObserved(State state) { //TODO
-		return ((Environment)state).getLine().size() == length;
+	public boolean isFullyObserved(State state) {
+		return ((Environment)state).getCurrentPos() >= ((Environment) state).getLine().size() || ! ((Environment) state).getLine().contains(Square.UNKNOWN);
 	}
 
 	@Override
@@ -83,15 +88,10 @@ public class BWSProblem extends Problem {
 			System.out.println("\n$ Gathering perceps. ");
 			System.out.print("$ Current square's colour? [BLACK|WHITE] >>");
 			read = scan.nextLine();
-		} while (read.equals("BLACK") && read.equals("WHITE\n"));
+		} while ( ! read.equals("BLACK") && ! read.equals("WHITE"));
 		
 		((Environment) st).setSquare(Square.valueOf(read));
 
 		return st;
-	}
-	
-	public int getLength()
-	{
-		return length;
 	}
 }
