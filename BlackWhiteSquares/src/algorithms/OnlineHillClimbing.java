@@ -2,6 +2,9 @@ package algorithms;
 
 import java.util.List;
 
+import blwhsquares.BWSProblem;
+import blwhsquares.Environment;
+
 import es.deusto.ingenieria.is.search.algorithms.Node;
 import es.deusto.ingenieria.is.search.algorithms.heuristic.EvaluationFunction;
 import es.deusto.ingenieria.is.search.algorithms.heuristic.HeuristicSearchMethod;
@@ -23,8 +26,13 @@ public class OnlineHillClimbing extends HeuristicSearchMethod {
 		while(!localBestFound) {
 			// EXPAND currentNode's state and keep bestSuccessor
 			Node bestSuccessor = expand(currentNode, problem);
+			if ( ! problem.isFullyObserved(bestSuccessor.getState()))
+			{
+				bestSuccessor.setState(problem.gatherPercepts(bestSuccessor.getState()));
+			}
+			System.out.println(bestSuccessor);
 			// IF fcurrentNode better than or equal to fbestSuccessor
-			if(getEvaluationFunction().calculateH(currentNode) <= getEvaluationFunction().calculateH(bestSuccessor))
+			if(getEvaluationFunction().calculateH(currentNode) <= getEvaluationFunction().calculateH(bestSuccessor) || ((Environment) currentNode.getState()).getCurrentPos() >= ((BWSProblem) problem).getLength())
 				// THEN local_best found
 				localBestFound = true;
 			else
@@ -37,17 +45,15 @@ public class OnlineHillClimbing extends HeuristicSearchMethod {
 	protected Node expand(Node currentNode, Problem problem) { 
 		List<Operator> operators = problem.getOperators();
 		// bestSuccessor = currentNode's first succesor
-		Node bestSuccessor = new Node(operators.get(0).apply(currentNode.getState()));
-		// (needed later)
-		double fbestSuccessor = getEvaluationFunction().calculateH(bestSuccessor);
-		operators.remove(0);
-		// FOR EACH of the rest of CurrentNode's succcessors DO
+		Node bestSuccessor = null;
+		double fbestSuccessor = 0;
+		// FOR EACH of the CurrentNode's succcessors DO
 		for(Operator operator : operators) {
 			Node successor = new Node(operator.apply(currentNode.getState()));
 			// Compute f(successor)
-			double fsuccessor = getEvaluationFunction().calculateH(successor);
+			double fsuccessor = successor.getState() != null ? getEvaluationFunction().calculateH(successor) : ((BWSProblem) problem).getLength();
 			// If fsuccessor better than fbestsuccessor THEN
-			if(fsuccessor < fbestSuccessor) {
+			if(bestSuccessor == null || fsuccessor < fbestSuccessor) {
 				bestSuccessor = successor;
 				fbestSuccessor = fsuccessor;
 			}

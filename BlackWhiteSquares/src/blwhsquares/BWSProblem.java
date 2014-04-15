@@ -14,6 +14,7 @@ import es.deusto.ingenieria.is.search.formulation.State;
 public class BWSProblem extends Problem {
 
 	private int length;
+	private Scanner scan = new Scanner(System.in);
 
 	public BWSProblem() {
 		addInitialState(gatherInitialPercepts());
@@ -55,10 +56,9 @@ public class BWSProblem extends Problem {
 		//super.addOperator(new MoveRightFour());
 		//super.addOperator(new MoveRightOne());
 		//super.addOperator(new MoveRightTwo());
+		super.addOperator(new MoveRightOne());
 		super.addOperator(new MoveRightTwo());
 		super.addOperator(new MoveRightFour());
-		super.addOperator(new MoveRightOne());
-
 	}
 
 	public Node solve(SearchMethod alg)
@@ -75,7 +75,6 @@ public class BWSProblem extends Problem {
 
 	@Override
 	public State gatherPercepts(State state) {
-		Scanner scan = new Scanner(System.in);
 		String read = "";
 		State st = ((Environment)state).clone();
 		
@@ -84,11 +83,15 @@ public class BWSProblem extends Problem {
 			System.out.println("\n$ Gathering perceps. ");
 			System.out.print("$ Current square's colour? [BLACK|WHITE] >>");
 			read = scan.nextLine();
-		} while (read != "BLACK" && read != "WHITE");
-		scan.close();
+		} while (read.equals("BLACK") && read.equals("WHITE\n"));
 		
-		((Environment) st).addSquare(Square.valueOf(read));
+		((Environment) st).setSquare(Square.valueOf(read));
 
 		return st;
+	}
+	
+	public int getLength()
+	{
+		return length;
 	}
 }

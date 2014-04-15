@@ -33,10 +33,12 @@ public class EnvironmentReader extends StateXMLReader {
 		{
 			this.length = Integer.parseInt(attrs.getValue("length"));
 			this.environment= new Environment(this.length);
+			for (int i = 1; i < this.length; i++)
+				((Environment) this.environment).addSquare(Square.UNKNOWN);
 		}
 		else if(qname.equals("is:white"))
-			((Environment) this.environment).addSquare(Square.WHITE);
+			((Environment) this.environment).setSquare(Square.WHITE);
 		else if(qname.equals("is:black"))
-			((Environment) this.environment).addSquare(Square.BLACK);
+			((Environment) this.environment).setSquare(Square.BLACK);
 	}
 }

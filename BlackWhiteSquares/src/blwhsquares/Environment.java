@@ -9,7 +9,8 @@ public class Environment extends State implements Cloneable {
 
 	public enum Square {
 		WHITE,
-		BLACK;
+		BLACK,
+		UNKNOWN;
 	}
 
 	private List<Square> line;
@@ -28,6 +29,10 @@ public class Environment extends State implements Cloneable {
 
 	public void addSquare(Square sq){
 		this.line.add(sq);
+	}
+	
+	public void setSquare(Square sq){
+		this.line.set(currentPos, sq);
 	}
 
 	public List<Square> getLine() {
