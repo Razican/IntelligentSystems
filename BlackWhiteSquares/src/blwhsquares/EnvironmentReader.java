@@ -11,6 +11,7 @@ public class EnvironmentReader extends StateXMLReader {
 
 	// The initial state environment state
 	private State environment;
+	private int length;
 
 	// The initial problem environment state
 	public EnvironmentReader(String fileXML) {
@@ -22,9 +23,17 @@ public class EnvironmentReader extends StateXMLReader {
 		return environment;
 	}
 	
+	public int getLength()
+	{
+		return this.length;
+	}
+	
 	public void startElement(String arg0, String arg1, String qname, Attributes attrs) throws SAXException {
 		if(qname.equals("is:lineofsquares"))
-			this.environment= new Environment(Integer.parseInt(attrs.getValue("length")));
+		{
+			this.length = Integer.parseInt(attrs.getValue("length"));
+			this.environment= new Environment(this.length);
+		}
 		else if(qname.equals("is:white"))
 			((Environment) this.environment).addSquare(Square.WHITE);
 		else if(qname.equals("is:black"))

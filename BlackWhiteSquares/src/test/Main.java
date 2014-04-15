@@ -1,7 +1,10 @@
-package blwhsquares;
+package test;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import blwhsquares.BWSProblem;
+import blwhsquares.Environment;
 
 import algorithms.AStar;
 import es.deusto.ingenieria.is.search.algorithms.blind.BreadthFS;
