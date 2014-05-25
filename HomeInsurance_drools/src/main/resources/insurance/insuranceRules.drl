@@ -1,0 +1,12 @@
+package insurance
+
+import es.deusto.ingenieria.is.kbs.insurance.Home
+import es.deusto.ingenieria.is.kbs.insurance.Home.AgeRange
+import es.deusto.ingenieria.is.kbs.insurance.Home.BudgetRange
+import es.deusto.ingenieria.is.kbs.insurance.Home.Check
+import es.deusto.ingenieria.is.kbs.insurance.Home.ConstructionQuality
+import es.deusto.ingenieria.is.kbs.insurance.Home.Type
+import es.deusto.ingenieria.is.kbs.insurance.Policy
+import es.deusto.ingenieria.is.kbs.insurance.Policy.Name
+
+
