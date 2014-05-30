@@ -9,4 +9,151 @@ import es.deusto.ingenieria.is.kbs.insurance.Home.Type
 import es.deusto.ingenieria.is.kbs.insurance.Policy
 import es.deusto.ingenieria.is.kbs.insurance.Policy.Name
 
+rule "Low Budget"
+	salience 10
+when
+	$home : Home(budgetRange == null, budget < 150)
+then
+	$home.setBudgetRange(BudgetRange.LOW);
+	$home.addMilestone("Budget Range is " + BudgetRange.LOW);
+	update($home);
+end
 
+rule "Medium Budget"
+	salience 10
+when
+	$home : Home(budgetRange == null, budget > 150 && budget <= 250)
+then
+	$home.setBudgetRange(BudgetRange.MEDIUM);
+	$home.addMilestone("Budget Range is " + BudgetRange.MEDIUM);
+	update($home)
+end
+
+rule "High Budget"
+	salience 10
+when
+	$home : Home(budgetRange == null, budget > 250)
+then
+	$home.setBudgetRange(BudgetRange.HIGH);
+	$home.addMilestone("Budget Range is " + BudgetRange.HIGH);
+	update($home);
+end
+
+rule "Third Party Damage"
+	salience 10
+when
+	$home : Home(budgetRange == BudgetRange.LOW, type == Type.APARTMENT)
+then
+	$home.setPolicy(new Policy(Name.THIRD_PARTY_DAMAGE));
+	retract($home);
+end
+
+rule "Essentials"
+	salience 10
+when
+	$home : Home(budgetRange == BudgetRange.LOW, type == Type.HOUSE)
+then
+	$home.setPolicy(new Policy(Name.HOME_ESSENTIALS));
+	retract($home);
+end
+
+rule "Old Aged"
+	salience 10
+when
+	$home : Home(ageRange == null, age > 35)
+then 
+	$home.setAgeRange(AgeRange.OLD);
+	$home.addMilestone("Age Range is " + AgeRange.OLD);
+	update($home);
+end
+
+rule "Multirisk1"
+	salience 9
+when
+	$home : Home(budgetRange == BudgetRange.MEDIUM, ageRange == AgeRange.OLD, improvements == true)
+then
+	$home.setPolicy(new Policy(Name.MULTIRISK));
+	retract($home);
+end
+
+rule "Silver1"
+	salience 9
+when
+	$home : Home(budgetRange == BudgetRange.MEDIUM, ageRange == AgeRange.OLD, improvements == false)
+then
+	$home.setPolicy(new Policy(Name.SILVER));
+	retract($home);
+end
+
+rule "Multirisk2"
+	salience 9
+when
+	$home : Home(budgetRange == BudgetRange.MEDIUM, ageRange == null, age <= 7)
+then
+	$home.setPolicy(new Policy(Name.MULTIRISK));
+	retract($home);
+end
+
+rule "Semi-new"
+	salience 10
+when
+	$home : Home(ageRange == null, age > 7 && age <= 35)
+then
+	$home.setAgeRange(AgeRange.SEMI_NEW);
+	$home.addMilestone("Age Range is " + AgeRange.SEMI_NEW);
+	update($home);
+end;
+
+rule "Multyrisk3"
+	salience 9
+when
+	$home : Home(budgetRange == BudgetRange.MEDIUM, ageRange == AgeRange.SEMI_NEW, quality == ConstructionQuality.AVERAGE)
+then
+	$home.setPolicy(new Policy(Name.MULTIRISK));
+	retract($home);
+end
+
+rule "Silver2"
+	salience 9
+when
+	$home : Home(budgetRange == BudgetRange.MEDIUM, ageRange == AgeRange.SEMI_NEW, quality == ConstructionQuality.EXCELLENT)
+then
+	$home.setPolicy(new Policy(Name.SILVER));
+	retract($home);
+end
+
+rule "Platinum1"
+	salience 9
+when
+	$home : Home(budgetRange == BudgetRange.HIGH, expensiveBelongins == true)
+then
+	$home.setPolicy(new Policy(Name.PLATINUM));
+	retract($home);
+end
+
+rule "Silver 3"
+	salience 9
+when
+	$home : Home(budgetRange == BudgetRange.HIGH, expensiveBelongins == false, ageRange == AgeRange.NEW)
+then
+	$home.setPolicy(new Policy(Name.SILVER));
+	retract($home);
+end
+
+rule "Platinum2"
+	salience 9
+when
+	$home : Home(budgetRange == BudgetRange.HIGH, ageRange == AgeRange.SEMI_NEW, quality == ConstructionQuality.AVERAGE)
+then
+	$home.setPolicy(new Policy(Name.PLATINUM));
+	retract($home);
+end
+
+rule "Gold"
+	salience 9
+when
+	$home : Home(budgetRange == BudgetRange.HIGH, expensiveBelongins == false, ageRange == AgeRange.SEMI_NEW, quality == ConstructionQuality.EXCELLENT)
+then
+	$home.setPolicy(new Policy(Name.GOLD));
+	retract($home);
+end
